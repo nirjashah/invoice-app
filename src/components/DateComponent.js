@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import '../style/DateComponent.css';
 
-
 /**
- * CustomerInfoComponent renders Customer details like name and email
+ * DateComponent renders due date
  */
 class DateComponent extends Component {
 
@@ -28,11 +25,12 @@ class DateComponent extends Component {
      */
     renderDateField() {
         return (
-           <DatePicker
+           <input
               className='invoice-date-input'
-              selected={this.props.dueDate}
+              type='date'
+              name='invoicedDueDate'
+              value={this.props.dueDate}
               onChange={this.handleInvoiceDateChange}
-              defaultValue={this.props.dueDate}
           />
         );
     }
