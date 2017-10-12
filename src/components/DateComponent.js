@@ -28,7 +28,6 @@ class DateComponent extends Component {
            <input
               className='invoice-date-input'
               type='date'
-              name='invoicedDueDate'
               value={this.props.dueDate}
               onChange={this.handleInvoiceDateChange}
           />

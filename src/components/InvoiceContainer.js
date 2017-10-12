@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import CustomerInfoComponent from './CustomerInfoComponent';
 import DateComponent from './DateComponent';
+import {getDateInRequiredFormat} from '../util/DateUtil'
 //import LineItemsComponent from './LineItemsComponent';
 
 
@@ -20,9 +21,9 @@ class InvoiceContainer extends Component {
       this.state = {
           customerInfo: {
               customerName: '',
-              customerEmail: '',
-              dueDate: ''
-          }
+              customerEmail: ''
+          },
+          dueDate: getDateInRequiredFormat(new Date(), 0)
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
@@ -56,11 +57,11 @@ class InvoiceContainer extends Component {
 
     /**
      * Method to handle date changes
-     * @param date Date object.
+     * @param event Event object.
      */
-    handleDateChange(date) {
+    handleDateChange(event) {
         this.setState({
-          dueDate: date
+          dueDate: getDateInRequiredFormat(new Date(event.target.value), 1)
         });
     }
 
