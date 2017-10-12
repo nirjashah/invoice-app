@@ -21,7 +21,7 @@ class InvoiceContainer extends Component {
           customerInfo: {
               customerName: '',
               customerEmail: '',
-              startDate: ''
+              dueDate: ''
           }
       };
 
@@ -56,11 +56,11 @@ class InvoiceContainer extends Component {
 
     /**
      * Method to handle date changes
-     * @param event Event object.
+     * @param date Date object.
      */
     handleDateChange(date) {
         this.setState({
-          startDate: date
+          dueDate: date
         });
     }
 
@@ -86,7 +86,7 @@ class InvoiceContainer extends Component {
         return(
           <DateComponent
                   onDateChange={this.handleDateChange}
-                  startDate={this.state.startDate}
+                  dueDate={this.state.dueDate}
             />
         );
     }

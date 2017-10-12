@@ -16,7 +16,7 @@ class DateComponent extends Component {
     }
 
     /**
-     * Handler method to handle change on CustomerEmail field.
+     * Handler method to handle change on Invoice date field.
      * @param event Event object.
      */
     handleInvoiceDateChange(event) {
@@ -30,15 +30,15 @@ class DateComponent extends Component {
         return (
            <DatePicker
               className='invoice-date-input'
-              selected={this.props.startDate}
+              selected={this.props.dueDate}
               onChange={this.handleInvoiceDateChange}
-              defaultValue={this.props.startDate}
+              defaultValue={this.props.dueDate}
           />
         );
     }
 
     /**
-     * Render method to render CustomerInfoComponent.
+     * Render method to render DateComponent.
      */
     render() {
         return (
