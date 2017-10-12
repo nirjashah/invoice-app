@@ -6,12 +6,13 @@
 .invoice-date-input {
     height: 30px;
     border-radius: 2px;
-    padding-right: 250px;
+    padding-right: 280px;
+    margin-left: 20px;
 }
 
 .date-information {
   display:inline-block;
-  width: 470px;
+  width: 500px;
   height: 30px;
 }
 
@@ -21,14 +22,8 @@
           font-weight: bold;
     }
     .invoice-date-input {
-        width: 100px;
         height: 30px;
-        padding-right: 0px;
-    }
-    .date-information {
-      display:block;
-      width: 470px;
-      height: 30px;
+        padding-right: 70px;
     }
 
 }

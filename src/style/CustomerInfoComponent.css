@@ -2,6 +2,7 @@
     width: 400px;
     height: 30px;
     margin-left: 50px;
+    margin-bottom: 10px;
     border-radius: 2px;
     font-style: normal;
     font-weight: 500;
@@ -12,15 +13,18 @@
     width: 400px;
     height: 30px;
     margin-left: 50px;
+    margin-bottom: 10px;
     border-radius: 2px;
 }
 
 .customer-name-label {
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .customer-email-label {
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 @media screen and (max-width:420px){
