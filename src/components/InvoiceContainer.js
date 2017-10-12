@@ -15,6 +15,10 @@ import {getDateInRequiredFormat} from '../util/DateUtil'
  */
 class InvoiceContainer extends Component {
 
+    /*
+    * dueDate in state adds 30 days to current date to represent new due date
+    *
+    */
     constructor(props) {
       super(props);
       //Handle app state
@@ -23,7 +27,7 @@ class InvoiceContainer extends Component {
               customerName: '',
               customerEmail: ''
           },
-          dueDate: getDateInRequiredFormat(new Date(), 0)
+          dueDate: getDateInRequiredFormat(new Date(), 30)
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
@@ -81,7 +85,6 @@ class InvoiceContainer extends Component {
 
     /**
     * Method to render CustomerInfoComponent
-    *
     */
     renderDateComponent(){
         return(

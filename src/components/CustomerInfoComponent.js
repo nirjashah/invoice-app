@@ -15,7 +15,7 @@ class CustomerInfoComponent extends Component {
 
     /**
      * Handler method to handle change on CustomerName field.
-     * @param event Event object.
+     * @param {event} Event object
      */
     handleCustomerNameChange(event) {
         this.props.onCustomerNameChange(event);
@@ -23,7 +23,7 @@ class CustomerInfoComponent extends Component {
 
     /**
      * Handler method to handle change on CustomerEmail field.
-     * @param event Event object.
+     * @param {event} Event object.
      */
     handleCustomerEmailChange(event) {
         this.props.onCustomerEmailChange(event);
@@ -60,7 +60,7 @@ class CustomerInfoComponent extends Component {
     }
 
     /**
-     * Render method to render CustomerInfoComponent.
+     * Method to render CustomerInfoComponent.
      */
     render() {
         return (

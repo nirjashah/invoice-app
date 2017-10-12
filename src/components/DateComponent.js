@@ -35,7 +35,7 @@ class DateComponent extends Component {
     }
 
     /**
-     * Render method to render DateComponent.
+     * Method to render DateComponent.
      */
     render() {
         return (
