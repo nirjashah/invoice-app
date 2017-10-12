@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import '../style/CustomerInfoComponent.css';
 
 /**
@@ -32,7 +31,6 @@ class CustomerInfoComponent extends Component {
 
     /**
      * Sub-render method to render customer name field.
-     * @see handleCustomerNameChange()
      */
     renderCustomerNameField() {
         return (
@@ -48,7 +46,6 @@ class CustomerInfoComponent extends Component {
 
     /**
      * Sub-render method to render customere email input field.
-     * @see handleCustomerEmailChange()
      */
     renderCustomerEmailField() {
         return (
@@ -64,8 +61,6 @@ class CustomerInfoComponent extends Component {
 
     /**
      * Render method to render CustomerInfoComponent.
-     * @see renderCustomerNameField()
-     * @see renderCustomerEmailField()
      */
     render() {
         return (

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import CustomerInfoComponent from './CustomerInfoComponent';
-//import DateComponent from './DateComponent';
+import DateComponent from './DateComponent';
 //import LineItemsComponent from './LineItemsComponent';
 
 
@@ -20,12 +20,14 @@ class InvoiceContainer extends Component {
       this.state = {
           customerInfo: {
               customerName: '',
-              customerEmail: ''
+              customerEmail: '',
+              startDate: ''
           }
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
       this.handleCustomerEmailChange = this.handleCustomerEmailChange.bind(this);
+      this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     /**
@@ -45,7 +47,6 @@ class InvoiceContainer extends Component {
      * @param event Event object.
      */
     handleCustomerEmailChange(event) {
-        console.log(this.state);
         let currentCustomerInfo = this.state.customerInfo;
         currentCustomerInfo.customerEmail = event.target.value;
         this.setState({
@@ -54,16 +55,52 @@ class InvoiceContainer extends Component {
     }
 
     /**
+     * Method to handle date changes
+     * @param event Event object.
+     */
+    handleDateChange(date) {
+        this.setState({
+          startDate: date
+        });
+    }
+
+    /**
+    * Method to render CustomerInfoComponent
+    *
+    */
+    renderCustomerInfoComponent(){
+        return(
+            <CustomerInfoComponent
+                  customerInfo={this.state.customerInfo}
+                  onCustomerNameChange={this.handleCustomerNameChange}
+                  onCustomerEmailChange={this.handleCustomerEmailChange}
+            />
+        );
+    }
+
+    /**
+    * Method to render CustomerInfoComponent
+    *
+    */
+    renderDateComponent(){
+        return(
+          <DateComponent
+                  onDateChange={this.handleDateChange}
+                  startDate={this.state.startDate}
+            />
+        );
+    }
+
+    /**
     * Method to render CustomerInfoComponent, DateComponent
     * and LineItemsComponent child components.
     */
     render(){
         return (
-          <CustomerInfoComponent
-                customerInfo={this.state.customerInfo}
-                onCustomerNameChange={this.handleCustomerNameChange}
-                onCustomerEmailChange={this.handleCustomerEmailChange}
-          />
+          <div>
+              {this.renderCustomerInfoComponent()}
+              {this.renderDateComponent()}
+          </div>
         );
 
     }

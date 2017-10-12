@@ -1,0 +1,34 @@
+.invoice-date-label{
+      float:left;
+      font-weight: bold;
+}
+
+.invoice-date-input {
+    height: 30px;
+    border-radius: 2px;
+    padding-right: 250px;
+}
+
+.date-information {
+  display:inline-block;
+  width: 470px;
+  height: 30px;
+}
+
+@media screen and (max-width:420px){
+    .invoice-date-label{
+          float:none;
+          font-weight: bold;
+    }
+    .invoice-date-input {
+        width: 100px;
+        height: 30px;
+        padding-right: 0px;
+    }
+    .date-information {
+      display:block;
+      width: 470px;
+      height: 30px;
+    }
+
+}
