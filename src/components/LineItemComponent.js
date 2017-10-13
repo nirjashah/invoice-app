@@ -9,7 +9,6 @@ class LineItemComponent extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
         this.handleLineDescriptionChange = this.handleLineDescriptionChange.bind(this);
         this.handleLineAmountChange = this.handleLineAmountChange.bind(this);
     }

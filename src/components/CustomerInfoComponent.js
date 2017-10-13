@@ -9,7 +9,6 @@ class CustomerInfoComponent extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
         this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
         this.handleCustomerEmailChange = this.handleCustomerEmailChange.bind(this);
     }
