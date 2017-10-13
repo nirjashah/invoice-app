@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import CustomerInfoComponent from './CustomerInfoComponent';
 import DateComponent from './DateComponent';
 import {getDateInRequiredFormat} from '../util/DateUtil'
-//import LineItemsComponent from './LineItemsComponent';
+import LineItemsComponent from './LineItemsComponent';
 
 
 //import '../style/AddInvoiceContainer.css';
@@ -21,18 +21,30 @@ class InvoiceContainer extends Component {
     */
     constructor(props) {
       super(props);
+
+      //Initially line item ID is 0
+      this.lineItemID = 0;
       //Handle app state
       this.state = {
           customerInfo: {
               customerName: '',
               customerEmail: ''
           },
-          dueDate: getDateInRequiredFormat(new Date(), 30)
+          dueDate: getDateInRequiredFormat(new Date(), 30),
+          lineItems: [
+                {
+                    lineItemID: this.lineItemID,
+                    lineDescription: 'Default description',
+                    lineAmount: '0'
+                }
+          ]
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
       this.handleCustomerEmailChange = this.handleCustomerEmailChange.bind(this);
       this.handleDateChange = this.handleDateChange.bind(this);
+      this.handleLineItemDescriptionChange = this.handleLineItemDescriptionChange.bind(this);
+      this.handleLineItemAmountChange = this.handleLineItemAmountChange.bind(this);
     }
 
     /**
@@ -49,7 +61,7 @@ class InvoiceContainer extends Component {
 
     /**
      * Method to handle customer email changes from email input field
-     * @param event Event object.
+     * @param {event} Event object.
      */
     handleCustomerEmailChange(event) {
         let currentCustomerInfo = this.state.customerInfo;
@@ -61,11 +73,43 @@ class InvoiceContainer extends Component {
 
     /**
      * Method to handle date changes
-     * @param event Event object.
+     * @param {event} Event object
      */
     handleDateChange(event) {
         this.setState({
           dueDate: getDateInRequiredFormat(new Date(event.target.value), 1)
+        });
+    }
+
+    /**
+     * Method to handle line item description change
+     * @param {event} Event object.
+     */
+    handleLineItemDescriptionChange(event) {
+        let currentLineItems = this.state.lineItems;
+        currentLineItems.forEach(function(lineItem) {
+            if (parseInt(event.target.id) === lineItem.lineItemID) {
+                lineItem.lineDescription = event.target.value;
+            }
+        });
+        this.setState({
+            lineItems: currentLineItems
+        });
+    }
+
+    /**
+     * Method to handle line item amount change
+     * @param {event} Event object.
+     */
+    handleLineItemAmountChange(event) {
+        let currentLineItems = this.state.lineItems;
+        currentLineItems.forEach(function(lineItem) {
+            if (parseInt(event.target.id) === lineItem.lineItemID) {
+                lineItem.lineAmount = event.target.value;
+            }
+        });
+        this.setState({
+            lineItems: currentLineItems
         });
     }
 
@@ -96,6 +140,19 @@ class InvoiceContainer extends Component {
     }
 
     /**
+    * Method to render LineItemsComponent
+    */
+    renderLineItemsComponent(){
+        return(
+          <LineItemsComponent
+                  lineItems={this.state.lineItems}
+                  onLineItemDescriptionChange={this.handleLineItemDescriptionChange}
+                  onLineItemAmountChange={this.handleLineItemAmountChange}
+          />
+        );
+    }
+
+    /**
     * Method to render CustomerInfoComponent, DateComponent
     * and LineItemsComponent child components.
     */
@@ -104,6 +161,7 @@ class InvoiceContainer extends Component {
           <div>
               {this.renderCustomerInfoComponent()}
               {this.renderDateComponent()}
+              {this.renderLineItemsComponent()}
           </div>
         );
 

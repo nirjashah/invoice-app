@@ -13,8 +13,8 @@ class DateComponent extends Component {
     }
 
     /**
-     * Handler method to handle change on Invoice date field.
-     * @param event Event object.
+     * Handler method to handle change on Invoice date field
+     * @param {event} Event object
      */
     handleInvoiceDateChange(event) {
         this.props.onDateChange(event);
