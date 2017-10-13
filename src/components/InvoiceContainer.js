@@ -4,6 +4,7 @@ import CustomerInfoComponent from './CustomerInfoComponent';
 import DateComponent from './DateComponent';
 import {getDateInRequiredFormat} from '../util/DateUtil'
 import LineItemsComponent from './LineItemsComponent';
+import '../style/LineItemComponent.css';
 
 
 //import '../style/AddInvoiceContainer.css';
@@ -45,6 +46,7 @@ class InvoiceContainer extends Component {
       this.handleDateChange = this.handleDateChange.bind(this);
       this.handleLineItemDescriptionChange = this.handleLineItemDescriptionChange.bind(this);
       this.handleLineItemAmountChange = this.handleLineItemAmountChange.bind(this);
+      this.handleInvoiceButtonClick = this.handleInvoiceButtonClick.bind(this);
     }
 
     /**
@@ -114,6 +116,26 @@ class InvoiceContainer extends Component {
     }
 
     /**
+     * Method to add invoice line item on button click
+     * @param {event} Event object.
+     */
+    handleInvoiceButtonClick(event) {
+
+        let currentLineItems = this.state.lineItems;
+        let index = currentLineItems.length-1;
+        let lineItemCount = parseInt(currentLineItems[index].lineItemID) + 1;
+        let newLineItem = {
+            lineItemID: lineItemCount,
+            lineDescription: 'Default description',
+            lineAmount: '0'
+        }
+        currentLineItems.push(newLineItem);
+        this.setState({
+            lineItems: currentLineItems
+        });
+    }
+
+    /**
     * Method to render CustomerInfoComponent
     *
     */
@@ -148,6 +170,7 @@ class InvoiceContainer extends Component {
                   lineItems={this.state.lineItems}
                   onLineItemDescriptionChange={this.handleLineItemDescriptionChange}
                   onLineItemAmountChange={this.handleLineItemAmountChange}
+                  onInvoiceButtonClick={this.handleInvoiceButtonClick}
           />
         );
     }

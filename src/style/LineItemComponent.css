@@ -2,8 +2,8 @@
     width: 400px;
     height: 25px;
     margin-top: 10px;
-    float:left;
     margin-left: -88px;
+    float: left;
 }
 
 .line-amount-input{
@@ -13,12 +13,35 @@
     margin-left: -110px;
 }
 
-@media screen and (max-width:430px){
+.line-items-input{
+    margin-left: 520px;
+}
+
+@media screen and (max-width:1200px){
   .line-description-input{
-      width: 30%;
+      width: 40%;
+      border-radius: 2px;
   }
   .line-amount-input{
       width: 30%;
       margin-left: 40px;
+      border-radius: 2px;
   }
-}
+  .line-items-input{
+      margin-left: 200px;
+  }
+  }
+
+  @media screen and (max-width:420px){
+    .line-description-input{
+        width: 50%;
+        float: none;
+    }
+    .line-amount-input{
+        width: 30%;
+        margin-left: 40px;
+    }
+    .line-items-input{
+        margin-left: 130px;
+    }
+  }

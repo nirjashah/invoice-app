@@ -13,6 +13,7 @@ class LineItemsComponent extends Component {
         console.log(props);
         this.handleLineDescriptionChange = this.handleLineDescriptionChange.bind(this);
         this.handleLineAmountChange = this.handleLineAmountChange.bind(this);
+        this.handleAddLineItemBtnClick = this.handleAddLineItemBtnClick.bind(this);
     }
 
     /**
@@ -29,6 +30,14 @@ class LineItemsComponent extends Component {
      */
     handleLineAmountChange(event) {
         this.props.onLineItemAmountChange(event);
+    }
+
+    /**
+     * Handler method to add line item on button click
+     * @param {event} Event object
+     */
+    handleAddLineItemBtnClick(event) {
+        this.props.onInvoiceButtonClick(event);
     }
 
     /**
@@ -56,19 +65,28 @@ class LineItemsComponent extends Component {
     }
 
     /**
-     * Method to render DateComponent.
+     * Method to render Line item labels, line items and labels
      */
     render() {
         return (
-            <div>
-                <div className='line-items-label-container'>
-                    <label className='description-label'>{`Description`}</label>
-                    <label className='amount-label'>{`Amount`}</label>
-                </div>
-                <div>
-                    {this.renderLineItems()}
-                </div>
-            </div>
+          <div>
+              <div>
+                  <div className='line-items-label-container'>
+                      <label className='description-label'>{`Description`}</label>
+                      <label className='amount-label'>{`Amount`}</label>
+                  </div>
+                  <div>
+                      {this.renderLineItems()}
+                  </div>
+              </div>
+              <div>
+                  <button className='invoice-add-button'
+                      type='button'
+                      onClick={this.handleAddLineItemBtnClick}>
+                      <b>+</b>
+                  </button>
+              </div>
+          </div>
 
         );
     }

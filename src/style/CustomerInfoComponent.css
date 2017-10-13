@@ -27,17 +27,25 @@
     margin-bottom: 10px;
 }
 
-@media screen and (max-width:430px){
+@media screen and (max-width:420px){
+
+    .customer-email-label {
+        margin-left: 20px;
+    }
+
+    .customer-name-label {
+        margin-left: 20px;
+    }
 
     .customer-name-input {
         width: 340px;
         height: 30px;
-        margin-left: 0px;
+        margin-left: 10px;
     }
 
     .customer-email-input {
         width: 340px;
         height: 30px;
-        margin-left: 0px;
+        margin-left: 10px;
     }
 }
