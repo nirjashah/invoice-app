@@ -24,7 +24,7 @@
 
 @media screen and (max-width:420px){
     .invoice-date-label{
-        padding-left: 75px;
+        padding-left: 7px;
     }
     .date-information {
         width: 200px;
@@ -33,5 +33,12 @@
         width: 340px;
         margin-left: -65px;
     }
+}
 
+@media screen and (max-width:320px){
+
+    .invoice-date-input {
+        width: 300px;
+        margin-left: -50px;
+    }
 }

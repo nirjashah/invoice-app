@@ -1,0 +1,12 @@
+.total-label{
+    font-weight: bold;
+    top: 50px;
+    left: 300px;
+    position: relative;
+}
+
+@media screen and (max-width:800px){
+  .total-label{
+      left: 10%;
+  }
+}

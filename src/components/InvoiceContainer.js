@@ -4,7 +4,7 @@ import CustomerInfoComponent from './CustomerInfoComponent';
 import DateComponent from './DateComponent';
 import {getDateInRequiredFormat} from '../util/DateUtil'
 import LineItemsComponent from './LineItemsComponent';
-import '../style/LineItemComponent.css';
+import '../style/InvoiceContainer.css';
 
 
 //import '../style/AddInvoiceContainer.css';
@@ -180,12 +180,24 @@ class InvoiceContainer extends Component {
     * and LineItemsComponent child components.
     */
     render(){
+        const currentLineItems = this.state.lineItems;
+        let totalAmount = 0.00;
+        currentLineItems.forEach(function(lineItem){
+            totalAmount = totalAmount + parseFloat(lineItem.lineAmount);
+        })
         return (
-          <div>
-              {this.renderCustomerInfoComponent()}
-              {this.renderDateComponent()}
-              {this.renderLineItemsComponent()}
-          </div>
+            <div>
+                <div>
+                    {this.renderCustomerInfoComponent()}
+                    {this.renderDateComponent()}
+                    {this.renderLineItemsComponent()}
+                </div>
+                <div>
+                  <label className='total-label'>
+                      TOTAL $: {totalAmount.toFixed(2)}
+                  </label>
+                </div>
+            </div>
         );
 
     }
