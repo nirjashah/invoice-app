@@ -34,13 +34,13 @@ class InvoiceContainer extends Component {
           lineItems: [
                 {
                     lineItemID: this.lineItemID,
-                    lineDescription: 'Default description',
+                    lineDescription: '',
                     lineAmount: '0'
                 }
           ],
           errorMessage: '',
           showErrorMessage: false,
-          status: ''
+          invoiceSent: false
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
@@ -177,9 +177,17 @@ class InvoiceContainer extends Component {
     }
 
     handleSendInvoice(event) {
+        if(this.state.customerInfo.customerName === '' ||
+        this.state.customerInfo.customerName === ''){
+            this.setState({
+                errorMessage: 'Make sure that customer details are entered',
+                showErrorMessage: true
+            })
+            return;
+        }
         if(this.state.showErrorMessage){
             this.setState({
-                status: 'Please resolve issues before invoice can be sent'
+                errorMessage: 'Please resolve issues before invoice can be sent'
             })
             return;
         }
@@ -191,10 +199,11 @@ class InvoiceContainer extends Component {
             lineItems: this.state.lineItems
         }
         localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
+
         this.setState({
             errorMessage: '',
             showErrorMessage: false,
-            status: 'Invoice sent to local storage',
+            invoiceSent: 'Invoice sent to local storage',
             customerInfo: {
                 customerName: '',
                 customerEmail: ''
@@ -294,7 +303,7 @@ class InvoiceContainer extends Component {
         }
         return (
             <div>
-                {this.state.status}
+                {this.state.invoiceSent}
                 {app}
             </div>
         );
