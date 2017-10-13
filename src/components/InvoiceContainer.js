@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 
 import CustomerInfoComponent from './CustomerInfoComponent';
 import DateComponent from './DateComponent';
-import {getDateInRequiredFormat} from '../util/DateUtil'
 import LineItemsComponent from './LineItemsComponent';
+import {getDateInRequiredFormat} from '../util/DateUtil';
+import {validCustomerName, validCustomerEmail,
+    validAmount, generateNewInvoiceID} from '../util/BaseUtil';
 import '../style/InvoiceContainer.css';
-
-
-//import '../style/AddInvoiceContainer.css';
 
 /**
  * InvoiceContainer is a parent container component, responsible for holding the application state
@@ -38,7 +37,10 @@ class InvoiceContainer extends Component {
                     lineDescription: 'Default description',
                     lineAmount: '0'
                 }
-          ]
+          ],
+          errorMessage: '',
+          showErrorMessage: false,
+          status: ''
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
@@ -47,6 +49,7 @@ class InvoiceContainer extends Component {
       this.handleLineItemDescriptionChange = this.handleLineItemDescriptionChange.bind(this);
       this.handleLineItemAmountChange = this.handleLineItemAmountChange.bind(this);
       this.handleInvoiceButtonClick = this.handleInvoiceButtonClick.bind(this);
+      this.handleSendInvoice = this.handleSendInvoice.bind(this);
     }
 
     /**
@@ -54,6 +57,18 @@ class InvoiceContainer extends Component {
      * @param event Event object.
      */
     handleCustomerNameChange(event) {
+        //Error message should disappear once corrected
+        this.setState({
+            errorMessage: '',
+            showErrorMessage: false
+        })
+        if(!validCustomerName(event.target.value)){
+            this.setState({
+                errorMessage: 'Customer name can only contain letters A-Z, a-z and spaces',
+                showErrorMessage: true
+            })
+            return;
+        }
         let currentCustomerInfo = this.state.customerInfo;
         currentCustomerInfo.customerName = event.target.value;
         this.setState({
@@ -66,6 +81,18 @@ class InvoiceContainer extends Component {
      * @param {event} Event object.
      */
     handleCustomerEmailChange(event) {
+        //Error message should disappear once corrected
+        this.setState({
+            errorMessage: '',
+            showErrorMessage: false
+        })
+        if(!validCustomerEmail(event.target.value)){
+            this.setState({
+                errorMessage: 'Customer name can only contain letters A-Z, a-z and spaces',
+                showErrorMessage: true
+            })
+            return;
+        }
         let currentCustomerInfo = this.state.customerInfo;
         currentCustomerInfo.customerEmail = event.target.value;
         this.setState({
@@ -104,6 +131,20 @@ class InvoiceContainer extends Component {
      * @param {event} Event object.
      */
     handleLineItemAmountChange(event) {
+        //Error message should disappear once corrected
+        this.setState({
+            errorMessage: '',
+            showErrorMessage: false
+        })
+        //Validate amount for  line item
+        if(!validAmount(event.target.value)){
+          let index = event.target.id + 1;
+          this.setState({
+              errorMessage: 'Enter valid line amount for line:' + index,
+              showErrorMessage: true
+          })
+          return;
+        }
         let currentLineItems = this.state.lineItems;
         currentLineItems.forEach(function(lineItem) {
             if (parseInt(event.target.id) === lineItem.lineItemID) {
@@ -133,6 +174,41 @@ class InvoiceContainer extends Component {
         this.setState({
             lineItems: currentLineItems
         });
+    }
+
+    handleSendInvoice(event) {
+        if(this.state.showErrorMessage){
+            this.setState({
+                status: 'Please resolve issues before invoice can be sent'
+            })
+            return;
+        }
+        const invoiceID = generateNewInvoiceID()
+        const invoiceToBeStored = {
+            invoiceID: invoiceID,
+            customerInfo: this.state.customerInfo,
+            dueDate: this.state.dueDate,
+            lineItems: this.state.lineItems
+        }
+        localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
+        this.setState({
+            errorMessage: '',
+            showErrorMessage: false,
+            status: 'Invoice sent to local storage',
+            customerInfo: {
+                customerName: '',
+                customerEmail: ''
+            },
+            dueDate: getDateInRequiredFormat(new Date(), 30),
+            lineItems: [
+                  {
+                      lineItemID: this.lineItemID,
+                      lineDescription: 'Default description',
+                      lineAmount: '0'
+                  }
+            ]
+        })
+
     }
 
     /**
@@ -185,7 +261,7 @@ class InvoiceContainer extends Component {
         currentLineItems.forEach(function(lineItem){
             totalAmount = totalAmount + parseFloat(lineItem.lineAmount);
         })
-        return (
+        let app = (
             <div>
                 <div>
                     {this.renderCustomerInfoComponent()}
@@ -197,6 +273,29 @@ class InvoiceContainer extends Component {
                       TOTAL $: {totalAmount.toFixed(2)}
                   </label>
                 </div>
+                <div>
+                  <button className='send-invoice'
+                    type='button'
+                    onClick={this.handleSendInvoice}>
+                      SEND
+                  </button>
+                </div>
+            </div>
+        );
+        if(this.state.showErrorMessage){
+          return(
+            <div>
+              <span className='error-message'>
+                {this.state.errorMessage}
+              </span>
+              {app}
+            </div>
+          );
+        }
+        return (
+            <div>
+                {this.state.status}
+                {app}
             </div>
         );
 

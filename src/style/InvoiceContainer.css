@@ -5,8 +5,25 @@
     position: relative;
 }
 
+.send-invoice{
+    font-weight: bold;
+    top: 100px;
+    left: 300px;
+    position: relative;
+    background-color: #d3d3d3;
+    width: 100px;
+}
+
+.error-message{
+    color: red
+}
+
 @media screen and (max-width:800px){
   .total-label{
       left: 10%;
+  }
+  .send-invoice{
+      left: 10%;
+      top: 70px;
   }
 }
