@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import LineItemComponent from './LineItemComponent.js';
+import '../style/LineItemsComponent.css';
 
 /**
  * LineItemsComponent renders line items
+ * ParentComponent: InvoiceContainer
  */
 class LineItemsComponent extends Component {
 
@@ -59,7 +61,7 @@ class LineItemsComponent extends Component {
     render() {
         return (
             <div>
-                <div className='line-items-container'>
+                <div className='line-items-label-container'>
                     <label className='description-label'>{`Description`}</label>
                     <label className='amount-label'>{`Amount`}</label>
                 </div>

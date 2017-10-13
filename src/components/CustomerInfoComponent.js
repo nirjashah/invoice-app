@@ -3,6 +3,7 @@ import '../style/CustomerInfoComponent.css';
 
 /**
  * CustomerInfoComponent renders Customer details like name and email
+ * ParentComponent: InvoiceContainer
  */
 class CustomerInfoComponent extends Component {
 

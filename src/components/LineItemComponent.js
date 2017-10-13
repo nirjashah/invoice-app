@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import '../style/LineItemComponent.css';
 
 /**
  * LineItemComponent renders single line item
+ * ParentComponent: LineItemsComponent
  */
 class LineItemComponent extends Component {
 
@@ -34,7 +36,7 @@ class LineItemComponent extends Component {
     render() {
         return (
                 <div className='line-items-input'>
-                    <input className='line-description'
+                    <input className='line-description-input'
                         id={this.props.id}
                         type="text"
                         defaultValue={this.props.lineDescription}

@@ -1,6 +1,6 @@
 .customer-name-input {
     width: 400px;
-    height: 30px;
+    height: 25px;
     margin-left: 50px;
     margin-bottom: 10px;
     border-radius: 2px;
@@ -11,7 +11,7 @@
 
 .customer-email-input {
     width: 400px;
-    height: 30px;
+    height: 25px;
     margin-left: 50px;
     margin-bottom: 10px;
     border-radius: 2px;
@@ -27,7 +27,7 @@
     margin-bottom: 10px;
 }
 
-@media screen and (max-width:420px){
+@media screen and (max-width:430px){
 
     .customer-name-input {
         width: 340px;

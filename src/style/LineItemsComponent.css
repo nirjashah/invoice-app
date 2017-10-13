@@ -1,0 +1,36 @@
+.customer-name-input {
+
+}
+
+.customer-email-input {
+
+}
+
+.line-items-label-container{
+  margin-top: 10px;
+}
+
+.description-label {
+    font-weight: bold;
+    float:left;
+    margin-left: 30%;
+    padding-top: 10px;
+}
+
+.amount-label {
+    font-weight: bold;
+    margin-left: 10%;
+    padding-top: 30px;
+}
+
+@media screen and (max-width:420px){
+  .description-label {
+      margin-left: 5%;
+  }
+}
+
+@media screen and (max-width:860px){
+    .description-label {
+        margin-left: 5%;
+    }
+  }

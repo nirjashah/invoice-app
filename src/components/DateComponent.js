@@ -3,6 +3,7 @@ import '../style/DateComponent.css';
 
 /**
  * DateComponent renders due date
+ * ParentComponent: InvoiceContainer
  */
 class DateComponent extends Component {
 
