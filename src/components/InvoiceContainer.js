@@ -50,6 +50,7 @@ class InvoiceContainer extends Component {
       this.handleLineItemAmountChange = this.handleLineItemAmountChange.bind(this);
       this.handleInvoiceButtonClick = this.handleInvoiceButtonClick.bind(this);
       this.handleSendInvoice = this.handleSendInvoice.bind(this);
+      this.handleCreateNewInvoice = this.handleCreateNewInvoice.bind(this);
     }
 
     /**
@@ -138,7 +139,7 @@ class InvoiceContainer extends Component {
         })
         //Validate amount for  line item
         if(!validAmount(event.target.value)){
-          let index = event.target.id + 1;
+          let index = parseInt(event.target.id) + 1;
           this.setState({
               errorMessage: 'Enter valid line amount for line:' + index,
               showErrorMessage: true
@@ -167,7 +168,7 @@ class InvoiceContainer extends Component {
         let lineItemCount = parseInt(currentLineItems[index].lineItemID) + 1;
         let newLineItem = {
             lineItemID: lineItemCount,
-            lineDescription: 'Default description',
+            lineDescription: '',
             lineAmount: '0'
         }
         currentLineItems.push(newLineItem);
@@ -176,6 +177,10 @@ class InvoiceContainer extends Component {
         });
     }
 
+    /**
+     * Method to add send invoice on button click
+     * @param {event} Event object.
+     */
     handleSendInvoice(event) {
         if(this.state.customerInfo.customerName === '' ||
         this.state.customerInfo.customerName === ''){
@@ -199,11 +204,21 @@ class InvoiceContainer extends Component {
             lineItems: this.state.lineItems
         }
         localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
-
         this.setState({
+            invoiceSent: true,
             errorMessage: '',
             showErrorMessage: false,
-            invoiceSent: 'Invoice sent to local storage',
+        })
+    }
+
+    /**
+     * Method to create new invoice on button click
+     * @param {event} Event object.
+     */
+    handleCreateNewInvoice(event) {
+
+        this.setState({
+            invoiceSent:false,
             customerInfo: {
                 customerName: '',
                 customerEmail: ''
@@ -212,7 +227,7 @@ class InvoiceContainer extends Component {
             lineItems: [
                   {
                       lineItemID: this.lineItemID,
-                      lineDescription: 'Default description',
+                      lineDescription: '',
                       lineAmount: '0'
                   }
             ]
@@ -301,9 +316,22 @@ class InvoiceContainer extends Component {
             </div>
           );
         }
+        if(this.state.invoiceSent){
+          return(
+            <div>
+              <span >
+                  Invoice sent to local storage
+              </span>
+              <button className='new-invoice'
+                type='button'
+                onClick={this.handleCreateNewInvoice}>
+                  CREATE NEW INVOICE
+              </button>
+            </div>
+          );
+        }
         return (
             <div>
-                {this.state.invoiceSent}
                 {app}
             </div>
         );
