@@ -14,8 +14,8 @@ it('Test DateComponent rendering', () => {
 });
 
 it('simulates date change events', () => {
-   const onButtonClick = sinon.spy();
-   const wrapper = shallow(<DateComponent onChange={onButtonClick} onDateChange={onButtonClick}/>);
+   const onInputChange = sinon.spy();
+   const wrapper = shallow(<DateComponent onDateChange={onInputChange}/>);
    wrapper.find('input').simulate('change');
-   expect(onButtonClick).to.have.property('callCount', 1);
+   expect(onInputChange).to.have.property('callCount', 1);
  });
