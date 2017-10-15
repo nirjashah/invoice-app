@@ -287,7 +287,7 @@ class InvoiceContainer extends Component {
                   lineItems={this.state.lineItems}
                   onLineItemDescriptionChange={this.handleLineItemDescriptionChange}
                   onLineItemAmountChange={this.handleLineItemAmountChange}
-                  onInvoiceButtonClick={this.handleInvoiceButtonClick}
+                  onAddInvoiceButtonClick={this.handleInvoiceButtonClick}
           />
         );
     }

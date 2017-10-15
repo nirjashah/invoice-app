@@ -13,7 +13,7 @@ it('Test DateComponent rendering', () => {
     expect(wrapper.find('.invoice-date-input')).to.have.length(1);
 });
 
-it('simulates date change events', () => {
+it('Simulates date change events', () => {
    const onInputChange = sinon.spy();
    const wrapper = shallow(<DateComponent onDateChange={onInputChange}/>);
    wrapper.find('input').simulate('change');
