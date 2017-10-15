@@ -36,7 +36,7 @@ class LineItemsComponent extends Component {
      * @param {event} Event object
      */
     handleAddLineItemBtnClick(event) {
-        this.props.onInvoiceButtonClick(event);
+        this.props.onAddInvoiceButtonClick(event);
     }
 
     /**
