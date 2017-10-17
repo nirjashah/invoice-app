@@ -203,7 +203,24 @@ class InvoiceContainer extends Component {
             dueDate: this.state.dueDate,
             lineItems: this.state.lineItems
         }
-        localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
+        //localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
+        fetch('http://localhost:3001/invoices', {
+          	method: 'post',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+          	body: JSON.stringify({
+            		invoiceToBeStored: invoiceToBeStored
+          	})
+        }).then(function (data) {
+          console.log('Request succeeded with JSON response', data);
+        })
+        .catch(function (error) {
+          console.log('Request failed', error);
+        });
+
         this.setState({
             invoiceSent: true,
             errorMessage: '',
@@ -320,7 +337,7 @@ class InvoiceContainer extends Component {
           return(
             <div>
               <span >
-                  Invoice sent to local storage
+                  Invoice sent to database
               </span>
               <button className='new-invoice'
                 type='button'
