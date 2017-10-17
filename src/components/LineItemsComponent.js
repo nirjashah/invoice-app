@@ -45,13 +45,13 @@ class LineItemsComponent extends Component {
      */
     renderLineItems() {
          let lineItemsEntries = this.props.lineItems;
-        //  onLineDescriptionChange={handleLineDescriptionChange}
-        //  onLineAmountChange={handleLineAmountChange}
+         let data = this.props.data;
           var lineItems = lineItemsEntries.map((lineItem) => {
              return (
                  <LineItemComponent
                      key={lineItem.lineItemID}
                      id={lineItem.lineItemID}
+                     data={data}
                      lineDescription={lineItem.lineDescription}
                      lineAmount={lineItem.lineAmount}
                      onLineItemDescriptionChange={this.handleLineDescriptionChange}

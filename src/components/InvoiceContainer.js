@@ -17,6 +17,7 @@ class InvoiceContainer extends Component {
 
     /*
     * dueDate in state adds 30 days to current date to represent new due date
+    * data represents typeAheadData
     *
     */
     constructor(props) {
@@ -40,7 +41,9 @@ class InvoiceContainer extends Component {
           ],
           errorMessage: '',
           showErrorMessage: false,
-          invoiceSent: false
+          invoiceSent: false,
+          data: ["Hours", "Service", "Oil change",
+          "Brakes", "Tires", "Filter", "Batteries", "Steering" ]
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
@@ -285,6 +288,7 @@ class InvoiceContainer extends Component {
         return(
           <LineItemsComponent
                   lineItems={this.state.lineItems}
+                  data={this.state.data}
                   onLineItemDescriptionChange={this.handleLineItemDescriptionChange}
                   onLineItemAmountChange={this.handleLineItemAmountChange}
                   onAddInvoiceButtonClick={this.handleInvoiceButtonClick}

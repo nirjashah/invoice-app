@@ -37,10 +37,17 @@ class LineItemComponent extends Component {
                 <div className='line-items-input'>
                     <input className='line-description-input'
                         id={this.props.id}
-                        type="text"
+                        type='text'
                         defaultValue={this.props.lineDescription}
                         onBlur={this.handleLineDescriptionChange}
+                        list='data'
                     />
+                  <datalist id='data'
+                        className='description-data-list'>
+                        {this.props.data.map((item) =>
+                            <option value={item} />
+                        )}
+                    </datalist>
                     <input className='line-amount-input'
                         id={this.props.id}
                         type="text"
