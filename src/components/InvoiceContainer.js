@@ -337,7 +337,7 @@ class InvoiceContainer extends Component {
           return(
             <div>
               <span >
-                  Invoice sent to local storage
+                  Invoice sent to database
               </span>
               <button className='new-invoice'
                 type='button'
