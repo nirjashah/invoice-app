@@ -229,6 +229,18 @@ class InvoiceContainer extends Component {
             invoiceSent: true,
             errorMessage: '',
             showErrorMessage: false,
+            customerInfo: {
+                customerName: '',
+                customerEmail: ''
+            },
+            dueDate: getDateInRequiredFormat(new Date(), 30),
+            lineItems: [
+                  {
+                      lineItemID: this.lineItemID,
+                      lineDescription: '',
+                      lineAmount: '0'
+                  }
+            ]
         })
     }
 
@@ -314,7 +326,8 @@ class InvoiceContainer extends Component {
     */
     render(){
         let app = (
-            <div>
+            //Key will initialize the state of child componets when invoice is sent
+            <div key={this.state.invoiceSent}>
                 <div>
                     {this.renderCustomerInfoComponent()}
                     {this.renderDateComponent()}
@@ -343,14 +356,10 @@ class InvoiceContainer extends Component {
         if(this.state.invoiceSent){
           return(
             <div>
-              <span >
+              <span className='invoice-sent-message'>
                   Invoice sent to database
               </span>
-              <button className='new-invoice'
-                type='button'
-                onClick={this.handleCreateNewInvoice}>
-                  CREATE NEW INVOICE
-              </button>
+              {app}
             </div>
           );
         }

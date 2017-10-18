@@ -44,8 +44,9 @@ class LineItemComponent extends Component {
                     />
                   <datalist id='data'
                         className='description-data-list'>
-                        {this.props.data.map((item) =>
-                            <option value={item} />
+                        {this.props.data.map((item, index) =>
+                            <option value={item}
+                                    key={index}/>
                         )}
                     </datalist>
                     <input className='line-amount-input'
