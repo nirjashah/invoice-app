@@ -54,8 +54,7 @@ class InvoiceContainer extends Component {
       this.handleLineItemAmountChange = this.handleLineItemAmountChange.bind(this);
       this.handleInvoiceButtonClick = this.handleInvoiceButtonClick.bind(this);
       this.handleSendInvoice = this.handleSendInvoice.bind(this);
-      this.handleCreateNewInvoice = this.handleCreateNewInvoice.bind(this);
-    }
+      }
 
     /**
      * Method to handle customer name changes from name input field
@@ -242,30 +241,6 @@ class InvoiceContainer extends Component {
                   }
             ]
         })
-    }
-
-    /**
-     * Method to create new invoice on button click
-     * @param {event} Event object.
-     */
-    handleCreateNewInvoice(event) {
-
-        this.setState({
-            invoiceSent:false,
-            customerInfo: {
-                customerName: '',
-                customerEmail: ''
-            },
-            dueDate: getDateInRequiredFormat(new Date(), 30),
-            lineItems: [
-                  {
-                      lineItemID: this.lineItemID,
-                      lineDescription: '',
-                      lineAmount: '0'
-                  }
-            ]
-        })
-
     }
 
     /**
