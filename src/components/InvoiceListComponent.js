@@ -8,29 +8,22 @@ class InvoiceListComponent extends Component {
 
     constructor(props) {
         super(props);
-        this.handleInvoiceDateChange = this.handleInvoiceDateChange.bind(this);
+        this.state = {
+            invoices: []
+        };
     }
 
-    /**
-     * Handler method to handle change on Invoice date field
-     * @param {event} Event object
-     */
-    handleInvoiceDateChange(event) {
-        this.props.onDateChange(event);
-    }
+    componentDidMount(){
+        fetch('http://localhost:3001/invoices')
+        .then(function(response) {
+          return response.json()
+        })
+        .then(responseJson=> {
+          this.setState({
+              invoices: responseJson["Data"]
+          })
 
-    /**
-     * Sub-render method to render date field.
-     */
-    renderDateField() {
-        return (
-           <input
-              className='invoice-date-input'
-              type='date'
-              value={this.props.dueDate}
-              onChange={this.handleInvoiceDateChange}
-          />
-        );
+        })
     }
 
     /**
@@ -38,9 +31,8 @@ class InvoiceListComponent extends Component {
      */
     render() {
         return (
-                <div className='date-information'>
-                    <label className='invoice-date-label'>{`Due Date`}</label>
-                    {this.renderDateField()}
+                <div>
+                    Hello
                 </div>
         );
     }
