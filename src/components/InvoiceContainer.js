@@ -5,6 +5,7 @@ import DateComponent from './DateComponent';
 import LineItemsComponent from './LineItemsComponent';
 import TotalAmountComponent from './TotalAmountComponent';
 import PreviewComponent from './PreviewComponent';
+import { Link, Route } from 'react-router-dom';
 import {getDateInRequiredFormat} from '../util/DateUtil';
 import {validCustomerName, validCustomerEmail,
     validAmount, generateNewInvoiceID} from '../util/BaseUtil';
@@ -95,7 +96,7 @@ class InvoiceContainer extends Component {
         })
         if(!validCustomerEmail(event.target.value)){
             this.setState({
-                errorMessage: 'Enter valid email address',
+                errorMessage: 'Enter valid email adress',
                 showErrorMessage: true
             })
             return;
@@ -328,12 +329,10 @@ class InvoiceContainer extends Component {
                       onClick={this.handleSendInvoice}>
                         SEND
                   </button>
+                  <Link to={`/preview`}>
+                      Preview
+                  </Link>
                 </div>
-                  <button className='send-invoice'
-                    type='button'
-                    onClick={this.handlePreviewInvoice}>
-                      PREVIEW
-                  </button>
             </div>
         );
         if(this.state.showErrorMessage){
@@ -356,18 +355,17 @@ class InvoiceContainer extends Component {
             </div>
           );
         }
-        if(this.state.invoicePreview){
-          return(
-            <PreviewComponent
-                    customerInfo={this.state.customerInfo}
-                    dueDate={this.state.dueDate}
-                    lineItems={this.state.lineItems}
-            />
-          )
-        }
         return (
-            <div>
-                {app}
+          <div>
+              {app}
+              <Route path="/preview"
+                     render={(props) =>
+                            <PreviewComponent {...props}
+                            customerInfo={this.state.customerInfo}
+                            dueDate={this.state.dueDate}
+                            lineItems={this.state.lineItems}
+                            />}
+              />
             </div>
         );
 

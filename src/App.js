@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import InvoiceContainer from './components/InvoiceContainer'
+import InvoiceContainer from './components/InvoiceContainer';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Invoice app</h1>
+      <Router>
+        <div className="App">
+          <div className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Invoice app</h1>
+          </div>
+          <InvoiceContainer />
         </div>
-        <InvoiceContainer />
-      </div>
+      </Router>
     );
   }
 }
