@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import CustomerInfoComponent from './CustomerInfoComponent';
 import DateComponent from './DateComponent';
 import LineItemsComponent from './LineItemsComponent';
+import TotalAmountComponent from './TotalAmountComponent';
 import {getDateInRequiredFormat} from '../util/DateUtil';
 import {validCustomerName, validCustomerEmail,
     validAmount, generateNewInvoiceID} from '../util/BaseUtil';
@@ -297,26 +298,28 @@ class InvoiceContainer extends Component {
     }
 
     /**
+    * Method to render totalAmount
+    */
+    renderTotalAmountComponent(){
+        return(
+          <TotalAmountComponent
+                  lineItems={this.state.lineItems}
+          />
+        );
+    }
+
+    /**
     * Method to render CustomerInfoComponent, DateComponent
     * and LineItemsComponent child components.
     */
     render(){
-        const currentLineItems = this.state.lineItems;
-        let totalAmount = 0.00;
-        currentLineItems.forEach(function(lineItem){
-            totalAmount = totalAmount + parseFloat(lineItem.lineAmount);
-        })
         let app = (
             <div>
                 <div>
                     {this.renderCustomerInfoComponent()}
                     {this.renderDateComponent()}
                     {this.renderLineItemsComponent()}
-                </div>
-                <div>
-                  <label className='total-label'>
-                      TOTAL $: {totalAmount.toFixed(2)}
-                  </label>
+                    {this.renderTotalAmountComponent()}
                 </div>
                 <div>
                   <button className='send-invoice'

@@ -31,32 +31,6 @@ it('Test InvoiceContainer child components rendering', () => {
     expect(invoiceContainerWrapper.find('button.send-invoice')).to.have.length(1);
 });
 
-it('Test that InvoiceContainer renders total amount', () => {
-    const invoiceContainerWrapper = shallow(<InvoiceContainer />);
-    invoiceContainerWrapper.setState({
-        customerInfo: {
-            customerName: 'James',
-            customerEmail: 'james@gmail.com'
-        },
-        dueDate: getDateInRequiredFormat(new Date(), 30),
-        lineItems: [
-              {
-                  lineItemID: 0,
-                  lineDescription: 'TShirt',
-                  lineAmount: '12.50'
-              },
-              {
-                  lineItemID: 1,
-                  lineDescription: 'Trowser',
-                  lineAmount: '25.00'
-              }
-        ],
-        invoiceSent: false,
-        showErrorMessage: false
-    });
-    expect(invoiceContainerWrapper.find('label.total-label')).to.have.length(1);
-    expect(invoiceContainerWrapper.find('label.total-label').text()).to.equal('TOTAL $: 37.50');
-});
 
 it('Test that error message is rendered when customer details are blank', () => {
     const invoiceContainerWrapper = shallow(<InvoiceContainer />);
