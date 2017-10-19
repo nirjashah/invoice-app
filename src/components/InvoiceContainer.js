@@ -4,6 +4,8 @@ import CustomerInfoComponent from './CustomerInfoComponent';
 import DateComponent from './DateComponent';
 import LineItemsComponent from './LineItemsComponent';
 import TotalAmountComponent from './TotalAmountComponent';
+import PreviewComponent from './PreviewComponent';
+import { Link, Route } from 'react-router-dom';
 import {getDateInRequiredFormat} from '../util/DateUtil';
 import {validCustomerName, validCustomerEmail,
     validAmount, generateNewInvoiceID} from '../util/BaseUtil';
@@ -44,7 +46,8 @@ class InvoiceContainer extends Component {
           showErrorMessage: false,
           invoiceSent: false,
           data: ["Hours", "Service", "Oil change",
-          "Brakes", "Tires", "Filter", "Batteries", "Steering" ]
+          "Brakes", "Tires", "Filter", "Batteries", "Steering" ],
+          invoicePreview: false
       };
 
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
@@ -54,6 +57,7 @@ class InvoiceContainer extends Component {
       this.handleLineItemAmountChange = this.handleLineItemAmountChange.bind(this);
       this.handleInvoiceButtonClick = this.handleInvoiceButtonClick.bind(this);
       this.handleSendInvoice = this.handleSendInvoice.bind(this);
+      this.handlePreviewInvoice = this.handlePreviewInvoice.bind(this);
       }
 
     /**
@@ -92,7 +96,7 @@ class InvoiceContainer extends Component {
         })
         if(!validCustomerEmail(event.target.value)){
             this.setState({
-                errorMessage: 'Customer name can only contain letters A-Z, a-z and spaces',
+                errorMessage: 'Enter valid email adress',
                 showErrorMessage: true
             })
             return;
@@ -186,7 +190,7 @@ class InvoiceContainer extends Component {
      */
     handleSendInvoice(event) {
         if(this.state.customerInfo.customerName === '' ||
-        this.state.customerInfo.customerName === ''){
+        this.state.customerInfo.customerEmail === ''){
             this.setState({
                 errorMessage: 'Make sure that customer details are entered',
                 showErrorMessage: true
@@ -244,6 +248,15 @@ class InvoiceContainer extends Component {
     }
 
     /**
+    * Method to preview invoice
+    */
+    handlePreviewInvoice() {
+      this.setState({
+          invoicePreview: true
+      })
+    }
+
+    /**
     * Method to render CustomerInfoComponent
     *
     */
@@ -295,6 +308,7 @@ class InvoiceContainer extends Component {
         );
     }
 
+
     /**
     * Method to render CustomerInfoComponent, DateComponent
     * and LineItemsComponent child components.
@@ -311,10 +325,15 @@ class InvoiceContainer extends Component {
                 </div>
                 <div>
                   <button className='send-invoice'
-                    type='button'
-                    onClick={this.handleSendInvoice}>
-                      SEND
+                      type='button'
+                      onClick={this.handleSendInvoice}>
+                        SEND
                   </button>
+                  <Link to={{
+                        pathname:`/preview`
+                    }}>
+                      Preview
+                  </Link>
                 </div>
             </div>
         );
@@ -339,8 +358,38 @@ class InvoiceContainer extends Component {
           );
         }
         return (
-            <div>
-                {app}
+          <div>
+              <Route exact path="/"
+                     render={(props) =>
+                       <div key={this.state.invoiceSent}>
+                           <div>
+                               {this.renderCustomerInfoComponent()}
+                               {this.renderDateComponent()}
+                               {this.renderLineItemsComponent()}
+                               {this.renderTotalAmountComponent()}
+                           </div>
+                           <div>
+                             <button className='send-invoice'
+                                 type='button'
+                                 onClick={this.handleSendInvoice}>
+                                   SEND
+                             </button>
+                             <Link className='preview-link' to={{
+                                   pathname:`/preview`
+                               }}>
+                                 Preview
+                             </Link>
+                           </div>
+                       </div>}
+              />
+              <Route path="/preview"
+                     render={(props) =>
+                            <PreviewComponent {...props}
+                            customerInfo={this.state.customerInfo}
+                            dueDate={this.state.dueDate}
+                            lineItems={this.state.lineItems}
+                            />}
+              />
             </div>
         );
 
