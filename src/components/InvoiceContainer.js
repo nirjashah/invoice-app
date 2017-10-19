@@ -329,7 +329,9 @@ class InvoiceContainer extends Component {
                       onClick={this.handleSendInvoice}>
                         SEND
                   </button>
-                  <Link to={`/preview`}>
+                  <Link to={{
+                        pathname:`/preview`
+                    }}>
                       Preview
                   </Link>
                 </div>
@@ -357,7 +359,29 @@ class InvoiceContainer extends Component {
         }
         return (
           <div>
-              {app}
+              <Route exact path="/"
+                     render={(props) =>
+                       <div key={this.state.invoiceSent}>
+                           <div>
+                               {this.renderCustomerInfoComponent()}
+                               {this.renderDateComponent()}
+                               {this.renderLineItemsComponent()}
+                               {this.renderTotalAmountComponent()}
+                           </div>
+                           <div>
+                             <button className='send-invoice'
+                                 type='button'
+                                 onClick={this.handleSendInvoice}>
+                                   SEND
+                             </button>
+                             <Link to={{
+                                   pathname:`/preview`
+                               }}>
+                                 Preview
+                             </Link>
+                           </div>
+                       </div>}
+              />
               <Route path="/preview"
                      render={(props) =>
                             <PreviewComponent {...props}
