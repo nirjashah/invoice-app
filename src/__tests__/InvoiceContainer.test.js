@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import {expect} from 'chai';
-
 import InvoiceContainer from '../components/InvoiceContainer';
+import {MemoryRouter, withRouter} from 'react-router-dom';
 import {getDateInRequiredFormat} from '../util/DateUtil';
 
 it('Test InvoiceContainer child components rendering', () => {
-    const invoiceContainerWrapper = shallow(<InvoiceContainer />);
+    const invoiceContainerWrapper = mount(<MemoryRouter><InvoiceContainer /></MemoryRouter>);
     invoiceContainerWrapper.setState({
         customerInfo: {
             customerName: 'James',
@@ -33,7 +33,7 @@ it('Test InvoiceContainer child components rendering', () => {
 
 
 it('Test that error message is rendered when customer details are blank', () => {
-    const invoiceContainerWrapper = shallow(<InvoiceContainer />);
+    const invoiceContainerWrapper = mount(<MemoryRouter><InvoiceContainer /></MemoryRouter>);
     //Customer details are not set
     invoiceContainerWrapper.setState({
         customerInfo: {
