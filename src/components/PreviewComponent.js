@@ -1,16 +1,20 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React, {Component} from 'react';
+import '../style/PreviewComponent.css';
 
-class PreviewComponent extends React.Component {
+class PreviewComponent extends Component {
 
 
   render() {
     const customerInfo = this.props.customerInfo;
     const date = this.props.dueDate;
     const lineItems = this.props.lineItems;
+    let totalAmount = 0.00;
+    lineItems.forEach(function(lineItem){
+        totalAmount = totalAmount + parseFloat(lineItem.lineAmount);
+    });
 
     return (
-             <div>
+             <div className="invoice-box">
                   <h3>Your Invoice</h3>
                   <table>
                     <tbody>
@@ -23,10 +27,6 @@ class PreviewComponent extends React.Component {
                       <tr>
                           <th>Date: {date}</th>
                       </tr>
-                    </tbody>
-                  </table>
-                  <table>
-                    <tbody>
                       <tr>
                           <th>Line#</th>
                           <th>Description</th>
@@ -35,15 +35,19 @@ class PreviewComponent extends React.Component {
                       {
                         lineItems &&
                         lineItems.map(lineItem => (
-                          <tr key={lineItem.lineDescription}>
-                            <td>{lineItem.lineDescription}</td>
+                          <tr key={lineItem.lineItemID}>
+                            <td>{lineItem.lineItemID}</td>
                             <td>{lineItem.lineDescription}</td>
                             <td>{lineItem.lineAmount}</td>
                           </tr>
                       ))
                       }
+                      <tr class="total">
+                          <th>Total: {totalAmount}</th>
+                      </tr>
                     </tbody>
                   </table>
+
              </div>
        )
   }

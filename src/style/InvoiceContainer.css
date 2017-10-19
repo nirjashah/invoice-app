@@ -7,6 +7,12 @@
     width: 100px;
 }
 
+.preview-link{
+  position: relative;
+  top: 100px;
+  left: 120px;
+}
+
 .error-message{
     color: red
 }

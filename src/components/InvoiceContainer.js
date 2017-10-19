@@ -374,7 +374,7 @@ class InvoiceContainer extends Component {
                                  onClick={this.handleSendInvoice}>
                                    SEND
                              </button>
-                             <Link to={{
+                             <Link className='preview-link' to={{
                                    pathname:`/preview`
                                }}>
                                  Preview
