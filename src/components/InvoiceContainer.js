@@ -47,8 +47,7 @@ class InvoiceContainer extends Component {
           showErrorMessage: false,
           invoiceSent: false,
           data: ["Hours", "Service", "Oil change",
-          "Brakes", "Tires", "Filter", "Batteries", "Steering" ],
-          invoicePreview: false
+          "Brakes", "Tires", "Filter", "Batteries", "Steering" ]
       };
 
       //Handler methods
@@ -255,7 +254,7 @@ class InvoiceContainer extends Component {
     */
     handlePreviewInvoice() {
       this.setState({
-          invoicePreview: true
+          invoiceSent: false
       })
     }
 
@@ -332,9 +331,8 @@ class InvoiceContainer extends Component {
                       onClick={this.handleSendInvoice}>
                         SEND
                   </button>
-                  <Link to={{
-                        pathname:`/preview`
-                    }}>
+                  <Link to={{pathname:`/preview`}}
+                        onClick={this.handlePreviewInvoice}>
                       Preview
                   </Link>
                 </div>
@@ -377,9 +375,8 @@ class InvoiceContainer extends Component {
                                  onClick={this.handleSendInvoice}>
                                    SEND
                              </button>
-                             <Link className='preview-link' to={{
-                                   pathname:`/preview`
-                               }}>
+                             <Link to={{pathname:`/preview`}}
+                                   onClick={this.handlePreviewInvoice}>
                                  Preview
                              </Link>
                            </div>

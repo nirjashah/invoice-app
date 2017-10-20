@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import '../style/PreviewComponent.css';
 
+/**
+ * PreviewComponent renders tatal amount
+ * ParentComponent: InvoiceContainer
+ */
 class PreviewComponent extends Component {
 
 
@@ -42,7 +46,7 @@ class PreviewComponent extends Component {
                           </tr>
                       ))
                       }
-                      <tr class="total">
+                      <tr className="total">
                           <th>Total: {totalAmount}</th>
                       </tr>
                     </tbody>
