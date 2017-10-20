@@ -69,7 +69,8 @@ class InvoiceContainer extends Component {
         //Error message should disappear once corrected
         this.setState({
             errorMessage: '',
-            showErrorMessage: false
+            showErrorMessage: false,
+            invoiceSent:false
         })
         //Validate customer name
         if(!validCustomerName(event.target.value)){
@@ -316,71 +317,60 @@ class InvoiceContainer extends Component {
     * and LineItemsComponent child components.
     */
     render(){
+        let errorMessage, invocieSentMessage;
+        if(this.state.showErrorMessage){
+            errorMessage = (
+              <div>
+                <span className='error-message'>
+                  {this.state.errorMessage}
+                </span>
+              </div>
+            );
+        }
+        if(this.state.invoiceSent){
+            invocieSentMessage = (
+              <div>
+                <span className='invoice-sent-message'>
+                    Invoice sent to database
+                </span>
+              </div>
+            );
+        }
+
         let app = (
             //Key will initialize the state of child componets when invoice is sent
             <div key={this.state.invoiceSent}>
+                <div>{errorMessage}</div>
+                <div>{invocieSentMessage}</div>
                 <div>
-                    {this.renderCustomerInfoComponent()}
-                    {this.renderDateComponent()}
-                    {this.renderLineItemsComponent()}
-                    {this.renderTotalAmountComponent()}
-                </div>
-                <div>
-                  <button className='send-invoice'
-                      type='button'
-                      onClick={this.handleSendInvoice}>
-                        SEND
-                  </button>
-                  <Link to={{pathname:`/preview`}}
-                        onClick={this.handlePreviewInvoice}>
-                      Preview
-                  </Link>
+                    <div>
+                        {this.renderCustomerInfoComponent()}
+                        {this.renderDateComponent()}
+                        {this.renderLineItemsComponent()}
+                        {this.renderTotalAmountComponent()}
+                    </div>
+                    <div>
+                      <button className='send-invoice'
+                          type='button'
+                          onClick={this.handleSendInvoice}>
+                            SEND
+                      </button>
+                      <Link to={{pathname:`/preview`}}
+                            onClick={this.handlePreviewInvoice}>
+                          Preview
+                      </Link>
+                    </div>
                 </div>
             </div>
         );
-        if(this.state.showErrorMessage){
-          return(
-            <div>
-              <span className='error-message'>
-                {this.state.errorMessage}
-              </span>
-              {app}
-            </div>
-          );
-        }
-        if(this.state.invoiceSent){
-          return(
-            <div>
-              <span className='invoice-sent-message'>
-                  Invoice sent to database
-              </span>
-              {app}
-            </div>
-          );
-        }
         return (
           <div>
               <Route exact path="/"
                      render={(props) =>
-                       <div key={this.state.invoiceSent}>
-                           <div>
-                               {this.renderCustomerInfoComponent()}
-                               {this.renderDateComponent()}
-                               {this.renderLineItemsComponent()}
-                               {this.renderTotalAmountComponent()}
-                           </div>
-                           <div>
-                             <button className='send-invoice'
-                                 type='button'
-                                 onClick={this.handleSendInvoice}>
-                                   SEND
-                             </button>
-                             <Link to={{pathname:`/preview`}}
-                                   onClick={this.handlePreviewInvoice}>
-                                 Preview
-                             </Link>
-                           </div>
-                       </div>}
+                       <div>
+                          {app}
+                       </div>
+                     }
               />
               <Route path="/preview"
                      render={(props) =>
