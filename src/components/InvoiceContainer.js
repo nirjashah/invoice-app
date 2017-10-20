@@ -279,8 +279,8 @@ class InvoiceContainer extends Component {
     renderDateComponent(){
         return(
           <DateComponent
-                  onDateChange={this.handleDateChange}
                   dueDate={this.state.dueDate}
+                  onDateChange={this.handleDateChange}
             />
         );
     }
