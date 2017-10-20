@@ -8,19 +8,20 @@ import PreviewComponent from './PreviewComponent';
 import { Link, Route } from 'react-router-dom';
 import {getDateInRequiredFormat} from '../util/DateUtil';
 import {validCustomerName, validCustomerEmail,
-    validAmount, generateNewInvoiceID} from '../util/BaseUtil';
+    validAmount} from '../util/BaseUtil';
 import '../style/InvoiceContainer.css';
 
 /**
  * InvoiceContainer is a parent container component, responsible for holding the application state
  * and rendering the child components- CustomerInfoComponent, DateComponent and LinesItemsComponents
+ * and PreviewComponent
  * State is passed down to the child components via props
  */
 class InvoiceContainer extends Component {
 
     /*
     * dueDate in state adds 30 days to current date to represent new due date
-    * data represents typeAheadData
+    * {data} represents data for typeAheadData for line item description
     *
     */
     constructor(props) {
@@ -50,6 +51,7 @@ class InvoiceContainer extends Component {
           invoicePreview: false
       };
 
+      //Handler methods
       this.handleCustomerNameChange = this.handleCustomerNameChange.bind(this);
       this.handleCustomerEmailChange = this.handleCustomerEmailChange.bind(this);
       this.handleDateChange = this.handleDateChange.bind(this);
@@ -70,6 +72,7 @@ class InvoiceContainer extends Component {
             errorMessage: '',
             showErrorMessage: false
         })
+        //Validate customer name
         if(!validCustomerName(event.target.value)){
             this.setState({
                 errorMessage: 'Customer name can only contain letters A-Z, a-z and spaces',
@@ -94,6 +97,7 @@ class InvoiceContainer extends Component {
             errorMessage: '',
             showErrorMessage: false
         })
+        //Validate email address
         if(!validCustomerEmail(event.target.value)){
             this.setState({
                 errorMessage: 'Enter valid email adress',
@@ -203,14 +207,13 @@ class InvoiceContainer extends Component {
             })
             return;
         }
-        const invoiceID = generateNewInvoiceID()
+
+        //Store the invoice in MySQL database using express
         const invoiceToBeStored = {
-            invoiceID: invoiceID,
             customerInfo: this.state.customerInfo,
             dueDate: this.state.dueDate,
             lineItems: this.state.lineItems
         }
-        //localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
         fetch('http://localhost:3001/invoices', {
           	method: 'post',
             headers: {
@@ -225,7 +228,7 @@ class InvoiceContainer extends Component {
           console.log('Request succeeded with JSON response', data);
         })
         .catch(function (error) {
-          console.log('Request failed', error);
+          console.log('Request to save invocie failed', error);
         });
 
         this.setState({

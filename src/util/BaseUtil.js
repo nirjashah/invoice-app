@@ -1,3 +1,4 @@
+// Base util for validation methods
 module.exports ={
   /**
   * Validate customer Name
@@ -24,13 +25,5 @@ module.exports ={
   */
   validAmount: function(amount) {
       return !isNaN(parseFloat(amount)) && isFinite(amount);
-  },
-
-  /**
-  * Generate unique invoice ID
-  * @return {String} invoiceID
-  */
-  generateNewInvoiceID: function() {
-      return 'INVOICE_' + Math.random().toString(36).substr(2, 9);
   }
 };
