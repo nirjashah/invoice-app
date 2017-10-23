@@ -15,7 +15,7 @@ module.exports ={
   * @return {Boolean}
   */
   validCustomerEmail: function(customerEmail) {
-      return /^\w+([-+.']\ w+)*@\w+([-. ]\w+)*\.\w+([-. ]\w+)*$/.test(customerEmail);
+      return /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(customerEmail);
   },
 
   /**

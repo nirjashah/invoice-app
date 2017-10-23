@@ -67,6 +67,7 @@ class InvoiceContainer extends Component {
      */
     handleCustomerNameChange(event) {
         //Error message should disappear once corrected
+        //Invoice sent message should disappear when starting new invoice
         this.setState({
             errorMessage: '',
             showErrorMessage: false,

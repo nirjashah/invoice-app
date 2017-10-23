@@ -31,6 +31,7 @@ class LineItemComponent extends Component {
 
     /**
      * Method to render individual line component.
+     * Line description is an input element with predefined values in datalist
      */
     render() {
         return (
