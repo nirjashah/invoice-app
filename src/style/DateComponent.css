@@ -1,6 +1,5 @@
 .invoice-date-label{
-      float:left;
-      font-weight: bold;
+    font-weight: bold;
 }
 
 .invoice-date-input {
