@@ -55,26 +55,3 @@ it('Test that error message is rendered when customer details are blank', () => 
     invoiceContainerWrapper.find('button.send-invoice').simulate('click');
     expect(invoiceContainerWrapper.find('span.error-message').text()).to.equal('Make sure that customer details are entered');
 });
-
-it('Test that invoice sent message appears when an invoice is sent', () => {
-    const invoiceContainerWrapper = shallow(<InvoiceContainer />);
-    //Customer details are not set
-    invoiceContainerWrapper.setState({
-        customerInfo: {
-            customerName: 'James',
-            customerEmail: 'james@gmail.com'
-        },
-        dueDate: getDateInRequiredFormat(new Date(), 30),
-        lineItems: [
-              {
-                  lineItemID: 0,
-                  lineDescription: 'TShirt',
-                  lineAmount: '12.50'
-              }
-        ],
-        invoiceSent: true,
-        showErrorMessage: false
-    });
-    expect(invoiceContainerWrapper.find('.invoice-sent-message')).to.have.length(1);
-    expect(invoiceContainerWrapper.find('.invoice-sent-message').text()).to.equal('Invoice sent to database');
-});

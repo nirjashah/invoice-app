@@ -317,7 +317,7 @@ class InvoiceContainer extends Component {
     * and LineItemsComponent child components.
     */
     render(){
-        let errorMessage, invocieSentMessage;
+        let errorMessage, invoiceSentMessage;
         if(this.state.showErrorMessage){
             errorMessage = (
               <div>
@@ -328,7 +328,7 @@ class InvoiceContainer extends Component {
             );
         }
         if(this.state.invoiceSent){
-            invocieSentMessage = (
+            invoiceSentMessage = (
               <div>
                 <span className='invoice-sent-message'>
                     Invoice sent to database
@@ -341,7 +341,7 @@ class InvoiceContainer extends Component {
             //Key will initialize the state of child componets when invoice is sent
             <div key={this.state.invoiceSent}>
                 <div>{errorMessage}</div>
-                <div>{invocieSentMessage}</div>
+                <div>{invoiceSentMessage}</div>
                 <div>
                     <div>
                         {this.renderCustomerInfoComponent()}
