@@ -24,3 +24,10 @@
 .invoice-box table tr.total th{
     text-align: right;
  }
+
+ .back-button{
+    background-color: #4CAF50;
+    font-size: 16px;
+    float: left;
+    margin-left: 20px;
+ }
