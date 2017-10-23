@@ -22,13 +22,13 @@ class PreviewComponent extends Component {
                   <h3>Your Invoice</h3>
                   <table>
                     <tbody>
-                      <tr>
+                      <tr className="customerName">
                           <th>Customer Name: {customerInfo.customerName}</th>
                       </tr>
-                      <tr>
+                      <tr className="customerEmail">
                           <th>Customer Email: {customerInfo.customerEmail}</th>
                       </tr>
-                      <tr>
+                      <tr className="invoiceDate">
                           <th>Date: {date}</th>
                       </tr>
                       <tr>
@@ -39,7 +39,7 @@ class PreviewComponent extends Component {
                       {
                         lineItems &&
                         lineItems.map(lineItem => (
-                          <tr key={lineItem.lineItemID}>
+                          <tr key={lineItem.lineItemID} className="lineItem">
                             <td>{lineItem.lineItemID}</td>
                             <td>{lineItem.lineDescription}</td>
                             <td>{lineItem.lineAmount}</td>
