@@ -38,7 +38,7 @@ class CustomerInfoComponent extends Component {
                 className='customer-name-input'
                 type='text'
                 name='customerName'
-                defaultValue={this.props.customerName}
+                defaultValue={this.props.customerInfo.customerName}
                 onBlur={this.handleCustomerNameChange}
             />
         );
@@ -53,7 +53,7 @@ class CustomerInfoComponent extends Component {
                 className='customer-email-input'
                 type='text'
                 name='customerEmail'
-                defaultValue={this.props.customerEmail}
+                defaultValue={this.props.customerInfo.customerEmail}
                 onBlur={this.handleCustomerEmailChange}
             />
         );
